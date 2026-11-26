@@ -84,12 +84,12 @@
                 <section class="rooms-section">
                     <div class="section-header">
                         <div>
-                            <h3>เลือกประเภทบริการถ่ายภาพ</h3>
-                            <p class="section-desc">คลิก "จองคิวนี้" เพื่อระบุวัน เวลา และรายละเอียดงานที่ต้องการให้ช่างภาพไปปฏิบัติงาน</p>
+                            <h3>ทีมช่างภาพพร้อมให้บริการ (3 คน)</h3>
+                            <p class="section-desc">เลือกช่างภาพที่ตรงกับความต้องการ คลิก "จองคิวช่างภาพ" เพื่อระบุวัน เวลา และรายละเอียดงาน</p>
                         </div>
                     </div>
                     
-                    <!-- Dynamic Services Grid -->
+                    <!-- Dynamic Services/Photographers Grid -->
                     <div class="room-grid" id="service-grid">
                         <!-- Cards will be injected by JavaScript -->
                     </div>
@@ -109,6 +109,14 @@
                             <span>เพิ่มคิวจองใหม่</span>
                         </button>
                     </div>
+
+                    <!-- Filter by Photographer -->
+                    <div class="photographer-filter-bar" id="photographer-filter-bar" style="margin-bottom: 1.2rem; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button type="button" class="filter-chip active" data-photographer="all">ทั้งหมด (3 คน)</button>
+                        <button type="button" class="filter-chip" data-photographer="ช่างภาพหนึ่ง">ช่างภาพหนึ่ง</button>
+                        <button type="button" class="filter-chip" data-photographer="ช่างภาพสอง">ช่างภาพสอง</button>
+                        <button type="button" class="filter-chip" data-photographer="ช่างภาพสาม">ช่างภาพสาม</button>
+                    </div>
                     
                     <div class="table-container">
                         <table class="schedule-table">
@@ -116,6 +124,7 @@
                                 <tr>
                                     <th>วันที่</th>
                                     <th>เวลา</th>
+                                    <th>ช่างภาพ</th>
                                     <th>ชื่องาน / กิจกรรม</th>
                                     <th>บริการ</th>
                                     <th>สถานที่</th>
@@ -155,8 +164,12 @@
                 
                 <div class="form-row split-2">
                     <div class="form-group">
-                        <label for="booking-title">ชื่องาน / กิจกรรม <span class="required">*</span></label>
-                        <input type="text" id="booking-title" required placeholder="เช่น ถ่ายภาพงานประชุมสัมมนาประจำปี">
+                        <label for="booking-photographer">เลือกช่างภาพ <span class="required">*</span></label>
+                        <select id="booking-photographer" required>
+                            <option value="ช่างภาพหนึ่ง">ช่างภาพหนึ่ง (ภาพนิ่ง & พิธีการ)</option>
+                            <option value="ช่างภาพสอง">ช่างภาพสอง (วิดีโอ & คอนเทนต์)</option>
+                            <option value="ช่างภาพสาม">ช่างภาพสาม (สตูดิโอ & ครบวงจร)</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="booking-service-type">ประเภทบริการ <span class="required">*</span></label>
@@ -166,6 +179,11 @@
                             <option value="ภาพนิ่งและวิดีโอ (Photo & Video)">ครบวงจร ภาพนิ่ง + วิดีโอ (Full Coverage)</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking-title">ชื่องาน / กิจกรรม <span class="required">*</span></label>
+                    <input type="text" id="booking-title" required placeholder="เช่น ถ่ายภาพงานประชุมสัมมนาประจำปี">
                 </div>
 
                 <div class="form-row split-2">

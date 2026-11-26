@@ -27,40 +27,49 @@ if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
     console.log("Firebase not configured yet. Fallback to LocalStorage.");
 }
 
-// Photographer & Photography Services Data
-const serviceData = [
+// 3 Photographers Data
+const photographers = [
     { 
         id: 1, 
-        name: "บริการถ่ายภาพนิ่ง (Still Photography)", 
+        name: "ช่างภาพหนึ่ง", 
+        nickname: "หนึ่ง",
+        title: "ผู้เชี่ยวชาญภาพนิ่ง & พิธีการ (Still & Event)", 
         category: "ภาพนิ่ง (Photo)",
+        defaultService: "ภาพนิ่ง (Photo)",
         icon: "photo_camera",
-        tag: "ยอดนิยม",
-        description: "บันทึกภาพบรรยากาศงานประชุม สัมมนา งานพิธีการ ภาพหมู่ และภาพเดี่ยวสำหรับประชาสัมพันธ์", 
-        equipment: ["Full-frame Mirrorless", "ชุดเลนส์คุณภาพสูงครบช่วง", "แฟลชหัวกล้อง & Diffuser"], 
+        tag: "เชี่ยวชาญภาพนิ่ง",
+        description: "บันทึกภาพบรรยากาศงานประชุม สัมมนา งานพิธีการ ภาพหมู่ และภาพถ่ายบุคคลประชาสัมพันธ์ ด้วยโทนภาพที่คมชัด สวยงาม เป็นธรรมชาติ", 
+        equipment: ["Full-frame Mirrorless", "Sony GM 24-70 f/2.8 & 70-200 f/2.8", "Speedlite Flash & Diffuser"], 
         deliverable: "ปรับแต่งโทนแสงสี ส่งมอบไฟล์ความละเอียดสูงทาง Cloud Storage",
         duration: "ส่งมอบงานภายใน 1-3 วันทำการ",
         image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80"
     },
     { 
         id: 2, 
-        name: "บันทึกวิดีโอ & วิดีโอไฮไลท์ (Videography & Highlights)", 
+        name: "ช่างภาพสอง", 
+        nickname: "สอง",
+        title: "ผู้เชี่ยวชาญวิดีโอ & คอนเทนต์ (Videographer & Motion)", 
         category: "วิดีโอ (Video)",
+        defaultService: "วิดีโอ (Video)",
         icon: "videocam",
-        tag: "แนะนำสำหรับงานอีเวนต์",
-        description: "บันทึกวิดีโอตลอดการจัดงาน สัมภาษณ์ผู้บริหาร และจัดทำคลิปไฮไลท์สรุปภาพรวมของงาน", 
-        equipment: ["กล้องวิดีโอความละเอียด 4K", "ไมโครโฟนไร้สาย (Wireless Mic)", "Gimbal ไม้กันสั่น 3 แกน"], 
+        tag: "เชี่ยวชาญวิดีโอ",
+        description: "บันทึกวิดีโอตลอดการจัดงาน สัมภาษณ์ผู้บริหาร และจัดทำคลิปไฮไลท์สรุปภาพรวม/Reels สำหรับประชาสัมพันธ์บนโซเชียลมีเดีย", 
+        equipment: ["กล้อง Cinema 4K 60fps", "ชุดไมโครโฟนไร้สายคู่ (Wireless Mic)", "Gimbal ไม้กันสั่น 3 แกน"], 
         deliverable: "ไฟล์คลิปวิดีโอตัดต่อพร้อมใส่ซับไตเติล ดนตรีประกอบ และกราฟิก",
         duration: "ส่งมอบงานภายใน 3-5 วันทำการ",
         image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80"
     },
     { 
         id: 3, 
-        name: "แพ็กเกจครบวงจร ภาพนิ่ง + วิดีโอ (Full Coverage)", 
+        name: "ช่างภาพสาม", 
+        nickname: "สาม",
+        title: "ผู้เชี่ยวชาญสตูดิโอ & ครบวงจร (Studio & All-Rounder)", 
         category: "ภาพนิ่งและวิดีโอ (Photo & Video)",
+        defaultService: "ภาพนิ่งและวิดีโอ (Photo & Video)",
         icon: "video_camera_front",
-        tag: "ครบจบในบริการเดียว",
-        description: "บริการบันทึกภาพนิ่งพร้อมถ่ายวิดีโอครบวงจร เหมาะสำหรับงานพิธีการสำคัญและงานสัมมนาใหญ่", 
-        equipment: ["กล้องภาพนิ่งและวิดีโอครบชุด", "ชุดไฟส่องสว่างต่อเนื่อง LED", "ไมค์บันทึกเสียงระดับมืออาชีพ"], 
+        tag: "ครบวงจร ภาพ & วิดีโอ",
+        description: "บริการบันทึกภาพนิ่งพร้อมถ่ายวิดีโอ งานถ่ายทอดสด (Live Stream) และงานสัมมนาขนาดใหญ่ พร้อมชุดไฟสตูดิโอเคลื่อนที่", 
+        equipment: ["กล้องภาพนิ่งและวิดีโอครบชุด", "ชุดไฟส่องสว่างต่อเนื่อง LED", "ไมค์สตูดิโอและระบบสลับสัญญาณ"], 
         deliverable: "ไฟล์ภาพนิ่งทั้งหมดที่ปรับแต่งแล้ว + คลิปวิดีโอไฮไลท์และบันทึกฉบับเต็ม",
         duration: "ส่งมอบงานภายใน 3-5 วันทำการ",
         image: "https://images.unsplash.com/photo-1533158307587-828f0a76ef46?auto=format&fit=crop&w=800&q=80"
@@ -70,6 +79,7 @@ const serviceData = [
 // Global Bookings Array & State
 let bookings = [];
 let searchQuery = "";
+let selectedPhotographerFilter = "all";
 let currentPage = 1;
 const rowsPerPage = 10;
 
@@ -126,12 +136,29 @@ if (savedTheme === 'dark') {
 }
 themeToggle.addEventListener('click', toggleTheme);
 
+// Filter by Photographer Chips
+function setupPhotographerFilters() {
+    const filterContainer = document.getElementById('photographer-filter-bar');
+    if (!filterContainer) return;
+
+    filterContainer.addEventListener('click', (e) => {
+        const chip = e.target.closest('.filter-chip');
+        if (!chip) return;
+
+        filterContainer.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        selectedPhotographerFilter = chip.dataset.photographer;
+        currentPage = 1;
+        renderSchedule();
+    });
+}
+
 // Search Handling
 if (globalSearch) {
     globalSearch.addEventListener('input', (e) => {
         searchQuery = e.target.value.trim().toLowerCase();
         currentPage = 1;
-        // If user is searching and currently on booking view, switch to schedule view if search is typed
         if (searchQuery.length > 0 && viewBooking.style.display !== 'none') {
             navSchedule.click();
         } else {
@@ -140,34 +167,53 @@ if (globalSearch) {
     });
 }
 
-// Render Photography Services Grid
-function renderServices() {
+// Helper: Check if a photographer has jobs today
+function getPhotographerTodayJobs(photographerName) {
+    const now = new Date();
+    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    return bookings.filter(b => (b.photographer === photographerName || b.photographerName === photographerName) && b.date === todayStr);
+}
+
+// Render 3 Photographers Cards
+function renderPhotographers() {
     if (!serviceGrid) return;
     serviceGrid.innerHTML = '';
 
-    serviceData.forEach(service => {
-        const equipmentHTML = service.equipment.map(item => `
+    photographers.forEach(p => {
+        const todayJobs = getPhotographerTodayJobs(p.name);
+        const isBusyToday = todayJobs.length > 0;
+        
+        const availabilityBadge = isBusyToday 
+            ? `<span class="photographer-avail-badge photographer-avail-busy"><span class="material-symbols-rounded" style="font-size: 14px;">event_busy</span> ติดคิวงานวันนี้ (${todayJobs.length})</span>`
+            : `<span class="photographer-avail-badge photographer-avail-free"><span class="material-symbols-rounded" style="font-size: 14px;">check_circle</span> ว่างพร้อมรับงาน</span>`;
+
+        const equipmentHTML = p.equipment.map(item => `
             <span class="amenity">
                 <span class="material-symbols-rounded" style="font-size: 14px;">check</span> ${item}
             </span>
         `).join('');
 
         const cardHTML = `
-            <div class="room-card" data-id="${service.id}">
+            <div class="room-card" data-id="${p.id}">
                 <div class="room-image" style="position: relative;">
-                    <img src="${service.image}" alt="${service.name}" loading="lazy" style="height: 200px; width: 100%; object-fit: cover;">
+                    <img src="${p.image}" alt="${p.name}" loading="lazy" style="height: 200px; width: 100%; object-fit: cover;">
                     <span class="service-badge">
-                        <span class="material-symbols-rounded" style="font-size: 14px;">star</span> ${service.tag}
+                        <span class="material-symbols-rounded" style="font-size: 14px;">star</span> ${p.tag}
                     </span>
+                    ${availabilityBadge}
                 </div>
                 <div class="room-content">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
                         <span class="badge-service">
-                            <span class="material-symbols-rounded" style="font-size: 14px;">${service.icon}</span> ${service.category}
+                            <span class="material-symbols-rounded" style="font-size: 14px;">${p.icon}</span> ${p.category}
+                        </span>
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--primary);">
+                            ${p.name}
                         </span>
                     </div>
-                    <h4 class="room-title" style="font-size: 1.15rem; margin-bottom: 8px;">${service.name}</h4>
-                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">${service.description}</p>
+                    <h4 class="room-title" style="font-size: 1.15rem; margin-bottom: 4px;">${p.name}</h4>
+                    <p style="font-size: 0.82rem; font-weight: 500; color: var(--text-muted); margin-bottom: 8px;">${p.title}</p>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">${p.description}</p>
                     
                     <div class="room-amenities" style="margin-bottom: 12px;">
                         ${equipmentHTML}
@@ -176,18 +222,18 @@ function renderServices() {
                     <div class="service-card-meta">
                         <div class="service-card-meta-item">
                             <span class="material-symbols-rounded">local_shipping</span>
-                            <span>${service.duration}</span>
+                            <span>${p.duration}</span>
                         </div>
                         <div class="service-card-meta-item">
                             <span class="material-symbols-rounded">cloud_done</span>
-                            <span>${service.deliverable}</span>
+                            <span>${p.deliverable}</span>
                         </div>
                     </div>
 
                     <div class="room-footer" style="margin-top: 18px; justify-content: flex-end;">
-                        <button class="btn-book" onclick="openBookingModal(${service.id})" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <button class="btn-book" onclick="openBookingModal('${p.name}')" style="display: inline-flex; align-items: center; gap: 6px;">
                             <span class="material-symbols-rounded" style="font-size: 18px;">event_available</span>
-                            <span>จองบริการนี้</span>
+                            <span>จอง ${p.name}</span>
                         </button>
                     </div>
                 </div>
@@ -203,11 +249,20 @@ function renderSchedule() {
     scheduleTbody.innerHTML = '';
     const paginationControls = document.getElementById('pagination-controls');
     
-    // Filter by search query if any
+    // Filter by photographer filter
     let filteredBookings = [...bookings];
+    if (selectedPhotographerFilter && selectedPhotographerFilter !== "all") {
+        filteredBookings = filteredBookings.filter(b => 
+            (b.photographer === selectedPhotographerFilter) || 
+            (b.photographerName === selectedPhotographerFilter)
+        );
+    }
+
+    // Filter by search query if any
     if (searchQuery) {
         filteredBookings = filteredBookings.filter(b => 
             (b.title && b.title.toLowerCase().includes(searchQuery)) ||
+            (b.photographer && b.photographer.toLowerCase().includes(searchQuery)) ||
             (b.bookedBy && b.bookedBy.toLowerCase().includes(searchQuery)) ||
             (b.location && b.location.toLowerCase().includes(searchQuery)) ||
             (b.serviceType && b.serviceType.toLowerCase().includes(searchQuery)) ||
@@ -216,12 +271,16 @@ function renderSchedule() {
     }
 
     if (filteredBookings.length === 0) {
-        const emptyMsg = searchQuery 
-            ? `ไม่พบคิวงานที่ตรงกับคำค้นหา "${searchQuery}"`
-            : "ยังไม่มีข้อมูลคิวงานช่างภาพในระบบ";
+        let emptyMsg = "ยังไม่มีข้อมูลคิวงานช่างภาพในระบบ";
+        if (searchQuery) {
+            emptyMsg = `ไม่พบคิวงานที่ตรงกับคำค้นหา "${searchQuery}"`;
+        } else if (selectedPhotographerFilter !== "all") {
+            emptyMsg = `ยังไม่มีคิวงานของ "${selectedPhotographerFilter}"`;
+        }
+
         scheduleTbody.innerHTML = `
             <tr>
-                <td colspan="7" style="text-align: center; padding: 32px; color: var(--text-muted);">
+                <td colspan="8" style="text-align: center; padding: 32px; color: var(--text-muted);">
                     <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.6;">calendar_today</span>
                     ${emptyMsg}
                 </td>
@@ -264,12 +323,20 @@ function renderSchedule() {
             statusBadge = `<span class="badge-status badge-past"><span class="material-symbols-rounded" style="font-size: 14px;">check_circle</span> เสร็จสิ้น</span>`;
         }
 
+        const photographerName = b.photographer || b.photographerName || 'ช่างภาพหนึ่ง';
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td style="font-weight: 500; white-space: nowrap;">${formattedDate}</td>
             <td style="white-space: nowrap; font-variant-numeric: tabular-nums;">
                 <span class="material-symbols-rounded" style="font-size: 15px; vertical-align: text-bottom; color: var(--text-muted);">schedule</span>
                 ${b.startTime} - ${b.endTime}
+            </td>
+            <td>
+                <span class="photographer-tag">
+                    <span class="material-symbols-rounded" style="font-size: 15px;">person</span>
+                    ${photographerName}
+                </span>
             </td>
             <td>
                 <div style="font-weight: 600; color: var(--text-main);">${b.title}</div>
@@ -334,50 +401,38 @@ function updateBookingStatus() {
     const statusIndicator = document.getElementById('booking-status-indicator');
     if (!statusIndicator) return;
 
-    if (bookings.length === 0) {
-        statusIndicator.innerHTML = `
-            <span class="material-symbols-rounded indicator-icon" style="color: #10B981;">check_circle</span> 
-            <span class="indicator-text" style="color: #10B981;">ว่างพร้อมรับงาน (ยังไม่มีคิวงานที่ลงบันทึก)</span>
-        `;
-        return;
-    }
-
     const now = new Date();
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
     const todayStr = `${year}-${month}-${day}`;
 
-    // Filter upcoming bookings (date >= today)
-    const upcoming = bookings.filter(b => b.date >= todayStr);
-    
-    upcoming.sort((a, b) => {
-        if (a.date !== b.date) return a.date.localeCompare(b.date);
-        return a.startTime.localeCompare(b.startTime);
+    // Calculate how many photographers have jobs today
+    const busyTodayPhotographers = new Set();
+    bookings.filter(b => b.date === todayStr).forEach(b => {
+        busyTodayPhotographers.add(b.photographer || b.photographerName || 'ช่างภาพหนึ่ง');
     });
 
-    if (upcoming.length === 0) {
+    const freeCount = photographers.length - busyTodayPhotographers.size;
+
+    if (busyTodayPhotographers.size === 0) {
         statusIndicator.innerHTML = `
             <span class="material-symbols-rounded indicator-icon" style="color: #10B981;">check_circle</span> 
-            <span class="indicator-text" style="color: #10B981;">ว่างพร้อมรับงาน (ไม่มีคิวงานจองเร็วๆ นี้)</span>
+            <span class="indicator-text" style="color: #10B981;">ช่างภาพทุกคนว่างพร้อมรับงานวันนี้ (3 ท่าน)</span>
         `;
         return;
     }
 
-    const nextBooking = upcoming[0];
-    
-    if (nextBooking.date === todayStr) {
+    if (freeCount > 0) {
+        const busyNames = Array.from(busyTodayPhotographers).join(', ');
         statusIndicator.innerHTML = `
-            <span class="material-symbols-rounded indicator-icon" style="color: #EF4444;">event_busy</span> 
-            <span class="indicator-text" style="color: #EF4444;">มีคิวงานถ่ายภาพวันนี้: ${nextBooking.startTime} - ${nextBooking.endTime} น. (${nextBooking.title})</span>
+            <span class="material-symbols-rounded indicator-icon" style="color: #F59E0B;">info</span> 
+            <span class="indicator-text" style="color: #D97706;">วันนี้มีคิวงาน: ${busyNames} (ยังว่างอีก ${freeCount} ท่าน)</span>
         `;
     } else {
-        const dateObj = new Date(nextBooking.date);
-        const options = { month: 'long', day: 'numeric' };
-        const formattedDate = dateObj.toLocaleDateString('th-TH', options);
         statusIndicator.innerHTML = `
-            <span class="material-symbols-rounded indicator-icon" style="color: #F59E0B;">schedule</span> 
-            <span class="indicator-text" style="color: #D97706;">คิวงานใกล้สุด: วันที่ ${formattedDate} เวลา ${nextBooking.startTime} น. (${nextBooking.title})</span>
+            <span class="material-symbols-rounded indicator-icon" style="color: #EF4444;">event_busy</span> 
+            <span class="indicator-text" style="color: #EF4444;">วันนี้ช่างภาพทุกคนติดคิวงานเต็มทุกท่าน</span>
         `;
     }
 }
@@ -385,7 +440,6 @@ function updateBookingStatus() {
 // Real-time Database Listener
 function setupDatabaseListener() {
     if (database) {
-        // ใช้ path 'photographer_bookings' เพื่อไม่ให้ชนกับระบบห้องประชุมเดิม
         database.ref('photographer_bookings').on('value', (snapshot) => {
             const data = snapshot.val();
             bookings = [];
@@ -394,6 +448,7 @@ function setupDatabaseListener() {
                     bookings.push({ ...data[key], key });
                 }
             }
+            renderPhotographers();
             renderSchedule();
         }, (error) => {
             console.error("Firebase read error, falling back to LocalStorage:", error);
@@ -413,28 +468,58 @@ function loadLocalStorageFallback() {
             bookings = [];
         }
     }
+    renderPhotographers();
     renderSchedule();
 }
 
 // Modal Management
-window.openBookingModal = function(serviceId) {
-    const service = serviceData.find(s => s.id === serviceId) || serviceData[0];
-    
-    document.getElementById('booking-service-id').value = service.id;
-    modalServiceName.textContent = `จองคิว: ${service.name}`;
-    modalServiceDesc.textContent = `หมวดหมู่: ${service.category} | ${service.description}`;
-    
+window.openBookingModal = function(photographerOrService) {
+    let selectedPhotographer = "ช่างภาพหนึ่ง";
+
+    if (typeof photographerOrService === 'string' && photographerOrService.includes('ช่างภาพ')) {
+        selectedPhotographer = photographerOrService;
+    } else if (typeof photographerOrService === 'number') {
+        const p = photographers.find(item => item.id === photographerOrService);
+        if (p) selectedPhotographer = p.name;
+    }
+
+    const p = photographers.find(item => item.name === selectedPhotographer) || photographers[0];
+
+    modalServiceName.textContent = `จองคิว: ${p.name}`;
+    modalServiceDesc.textContent = `${p.title} | ${p.description}`;
+
+    const photographerSelect = document.getElementById('booking-photographer');
+    if (photographerSelect) {
+        photographerSelect.value = p.name;
+    }
+
     const serviceTypeSelect = document.getElementById('booking-service-type');
     if (serviceTypeSelect) {
-        serviceTypeSelect.value = service.category;
+        serviceTypeSelect.value = p.defaultService;
     }
 
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('booking-date').value = today;
-    
+
     modalOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden';
 };
+
+// When user switches photographer in modal dropdown, update service defaults
+const modalPhotographerSelect = document.getElementById('booking-photographer');
+if (modalPhotographerSelect) {
+    modalPhotographerSelect.addEventListener('change', (e) => {
+        const p = photographers.find(item => item.name === e.target.value);
+        if (p) {
+            modalServiceName.textContent = `จองคิว: ${p.name}`;
+            modalServiceDesc.textContent = `${p.title} | ${p.description}`;
+            const serviceTypeSelect = document.getElementById('booking-service-type');
+            if (serviceTypeSelect) {
+                serviceTypeSelect.value = p.defaultService;
+            }
+        }
+    });
+}
 
 function closeBookingModal() {
     modalOverlay.classList.remove('active');
@@ -469,15 +554,16 @@ function showToast(message, isError = false) {
     
     setTimeout(() => {
         toast.classList.remove('show');
-    }, 3500);
+    }, 3800);
 }
 
-// Handle Form Submission
+// Handle Form Submission with Overlap Check per Photographer
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const title = document.getElementById('booking-title').value.trim();
+    const photographer = document.getElementById('booking-photographer').value;
     const serviceType = document.getElementById('booking-service-type').value;
+    const title = document.getElementById('booking-title').value.trim();
     const bookedBy = document.getElementById('booking-by').value.trim();
     const phone = document.getElementById('booking-phone').value.trim();
     const date = document.getElementById('booking-date').value;
@@ -497,15 +583,16 @@ bookingForm.addEventListener('submit', (e) => {
         return;
     }
     
-    // Check for overlapping photographer bookings on the same date
+    // Overlap condition: check if THIS specific photographer is already booked during this time interval
     const overlappingJob = bookings.find(b => {
+        const bPhotographer = b.photographer || b.photographerName || 'ช่างภาพหนึ่ง';
+        if (bPhotographer !== photographer) return false; // Allowed if different photographer!
         if (b.date !== date) return false;
-        // Interval overlap condition: (StartA < EndB) and (EndA > StartB)
         return (startTime < b.endTime) && (endTime > b.startTime);
     });
 
     if (overlappingJob) {
-        showToast(`ไม่สามารถจองได้ เนื่องจากมีคิวงาน "${overlappingJob.title}" เวลา ${overlappingJob.startTime} - ${overlappingJob.endTime} น. แล้ว`, true);
+        showToast(`ไม่สามารถจองได้ เนื่องจาก "${photographer}" มีคิวงาน "${overlappingJob.title}" เวลา ${overlappingJob.startTime} - ${overlappingJob.endTime} น. แล้ว`, true);
         return;
     }
     
@@ -516,6 +603,7 @@ bookingForm.addEventListener('submit', (e) => {
     
     const newBooking = {
         id: Date.now(),
+        photographer,
         title,
         serviceType,
         bookedBy,
@@ -534,23 +622,22 @@ bookingForm.addEventListener('submit', (e) => {
         database.ref('photographer_bookings').push(newBooking)
             .then(() => {
                 closeBookingModal();
-                showToast('จองคิวช่างภาพสำเร็จแล้ว! ข้อมูลถูกบันทึกขึ้นระบบส่วนกลาง');
+                showToast(`จองคิว "${photographer}" สำเร็จแล้ว! ข้อมูลถูกบันทึกขึ้นระบบส่วนกลาง`);
                 submitBtn.innerHTML = originalContent;
                 submitBtn.disabled = false;
             })
             .catch((error) => {
                 console.error("Firebase push error:", error);
-                // Fallback to local storage if Firebase rejected
                 saveToLocalStorage(newBooking);
                 closeBookingModal();
-                showToast('บันทึกลงระบบสำเร็จ (ออฟไลน์โหมด)');
+                showToast(`บันทึกคิว "${photographer}" สำเร็จ (ออฟไลน์โหมด)`);
                 submitBtn.innerHTML = originalContent;
                 submitBtn.disabled = false;
             });
     } else {
         saveToLocalStorage(newBooking);
         closeBookingModal();
-        showToast('จองคิวสำเร็จ (บันทึกลง LocalStorage)');
+        showToast(`จองคิว "${photographer}" สำเร็จ (บันทึกลง LocalStorage)`);
         submitBtn.innerHTML = originalContent;
         submitBtn.disabled = false;
     }
@@ -559,6 +646,7 @@ bookingForm.addEventListener('submit', (e) => {
 function saveToLocalStorage(booking) {
     bookings.push(booking);
     localStorage.setItem('photographer_bookings_data', JSON.stringify(bookings));
+    renderPhotographers();
     renderSchedule();
 }
 
@@ -615,6 +703,7 @@ function renderCalendar() {
     const isCurrentMonthYear = (year === now.getFullYear() && month === now.getMonth());
     const todayDate = now.getDate();
     
+    // Map date to count of bookings
     const bookedDates = new Set(bookings.map(b => b.date));
     
     for (let i = 1; i <= daysInMonth; i++) {
@@ -626,7 +715,7 @@ function renderCalendar() {
         if (isToday) classes += ' today';
         if (isBooked) classes += ' booked';
         
-        html += `<div class="${classes}" title="${isBooked ? 'มีคิวงาน' : ''}">${i}</div>`;
+        html += `<div class="${classes}" title="${isBooked ? 'มีคิวงานช่างภาพ' : ''}">${i}</div>`;
     }
     
     html += `</div>`;
@@ -635,6 +724,7 @@ function renderCalendar() {
 
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
-    renderServices();
+    setupPhotographerFilters();
+    renderPhotographers();
     setupDatabaseListener();
 });
